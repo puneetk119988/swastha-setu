@@ -1,0 +1,89 @@
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const Fuse = require("fuse.js");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+
+// Serve static frontend
+app.use(express.static(path.join(__dirname, "public")));
+
+// Load local medical FAQ knowledge base
+const faqPath = path.join(__dirname, "data", "medical_faq.json");
+const faqs = JSON.parse(fs.readFileSync(faqPath, "utf-8"));
+
+// Fuse.js for fuzzy search
+const fuse = new Fuse(faqs, {
+  keys: ["q", "tags", "a"],
+  includeScore: true,
+  threshold: 0.45,
+});
+
+function containsEmergencySignals(text) {
+  const t = (text || "").toLowerCase();
+  const redFlags = [
+    "chest pain",
+    "difficulty breathing",
+    "shortness of breath",
+    "fainting",
+    "unconscious",
+    "severe bleeding",
+    "stroke",
+    "face drooping",
+    "slurred speech",
+    "one-sided weakness",
+    "seizure",
+    "suicidal",
+    "severe allergic",
+    "anaphylaxis",
+    "swelling of lips",
+    "swelling of tongue",
+  ];
+  return redFlags.some((k) => t.includes(k));
+}
+
+function formatAnswer(userMessage, bestMatch) {
+  const disclaimer =
+    "⚠️ I’m Swastha Setu Assistant. I can provide general health information, not a diagnosis. If symptoms are severe or worsening, consult a doctor.";
+
+  const emergency =
+    "🚑 If you have chest pain, trouble breathing, fainting, severe bleeding, stroke signs, or severe allergic reaction, seek emergency care immediately.";
+
+  if (containsEmergencySignals(userMessage)) {
+    return `${emergency}\n\n${disclaimer}`;
+  }
+
+  if (!bestMatch) {
+    return (
+      `${disclaimer}\n\n` +
+      "I couldn’t find a confident answer in my local knowledge base.\n" +
+      "Try asking in a simpler way (example: “fever home care”, “headache causes”, “hydration tips”)."
+    );
+  }
+
+  return `${disclaimer}\n\n${bestMatch.a}`;
+}
+
+// Chat API
+app.post("/api/chat", (req, res) => {
+  const message = (req.body?.message || "").trim();
+
+  if (!message) {
+    return res.status(400).json({ reply: "Please type a question." });
+  }
+
+  const results = fuse.search(message);
+  const best = results.length ? results[0] : null;
+
+  const bestMatch = best && best.score <= 0.45 ? best.item : null;
+  const reply = formatAnswer(message, bestMatch);
+
+  res.json({ reply });
+});
+
+app.listen(PORT, () => {
+  console.log(`Swastha Setu running at http://localhost:${PORT}`);
+});

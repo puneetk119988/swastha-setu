@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swastha Setu</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">SS</div>
+      <div>
+        <div class="title">Swastha Setu</div>
+        <div class="subtitle">A simple health & wellness portal</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" data-tab="home">Home</button>
+      <button class="nav-btn" data-tab="exercises">Exercises</button>
+      <button class="nav-btn" data-tab="diet">Diet Plan</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="tab-home" class="tab active">
+      <h1>Welcome to Swastha Setu</h1>
+
+      <div class="card">
+        <h2>Quick Tips</h2>
+        <ul>
+          <li>Sleep 7–9 hours</li>
+          <li>Walk daily and stretch</li>
+          <li>Drink enough water</li>
+        </ul>
+      </div>
+
+      <div class="card warn">
+        <h2>Medical Disclaimer</h2>
+        <p>This chatbot gives general info only. Not a doctor replacement.</p>
+      </div>
+    </section>
+
+    <section id="tab-exercises" class="tab">
+      <h1>Exercise Videos</h1>
+
+      <div class="grid">
+        <div class="video-card">
+          <h3>Full Body Stretching</h3>
+          <video controls src="videos/stretching.mp4"></video>
+        </div>
+
+        <div class="video-card">
+          <h3>Beginner Yoga</h3>
+          <video controls src="videos/yoga-beginner.mp4"></video>
+        </div>
+
+        <div class="video-card">
+          <h3>Quick Warmup</h3>
+          <video controls src="videos/Quick Warmup.mp4"></video>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-diet" class="tab">
+      <h1>Diet Plan</h1>
+      <div class="diet-grid">
+        <div class="card">
+          <h2>Breakfast</h2>
+          <ul><li>Oats / Poha</li><li>Fruit</li></ul>
+        </div>
+        <div class="card">
+          <h2>Lunch</h2>
+          <ul><li>Roti / Rice</li><li>Dal</li></ul>
+        </div>
+        <div class="card">
+          <h2>Dinner</h2>
+          <ul><li>Soup / Roti</li><li>Vegetables</li></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button id="chat-fab" class="chat-fab">💬</button>
+
+  <div id="chat-panel" class="chat-panel hidden">
+    <div class="chat-header">
+      <div>
+        <div class="chat-title">Swastha Setu Assistant</div>
+        <div class="chat-subtitle">Local medical Q&A</div>
+      </div>
+      <button id="chat-close" class="chat-close">✖</button>
+    </div>
+
+    <div id="chat-messages" class="chat-messages">
+      <div class="msg bot">Hi! Ask me something medical.</div>
+    </div>
+
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" class="chat-input" placeholder="Ask something medical..." />
+      <button class="chat-send">Send</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

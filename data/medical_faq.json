@@ -1,0 +1,27 @@
+[
+  {
+    "q": "What should I do for a mild fever at home?",
+    "a": "For mild fever: rest, drink fluids (water/ORS), light meals, and monitor temperature. Paracetamol/acetaminophen may help for discomfort (follow label dosing). Seek medical advice if fever is high, lasts > 2–3 days, or you have severe symptoms.",
+    "tags": ["fever", "home care", "temperature", "fluids"]
+  },
+  {
+    "q": "How can I reduce headaches naturally?",
+    "a": "Try: hydration, a light snack, rest in a dark room, reduce screen brightness, gentle neck stretches, and sleep. If headaches are frequent, severe, sudden, or come with weakness/vision changes/vomiting, consult a doctor.",
+    "tags": ["headache", "hydration", "sleep", "stress"]
+  },
+  {
+    "q": "What are healthy hydration tips?",
+    "a": "Aim for regular water intake through the day. If you sweat a lot, include ORS/electrolytes. Check urine color (pale yellow is often okay). Limit sugary drinks.",
+    "tags": ["hydration", "water", "electrolytes", "ORS"]
+  },
+  {
+    "q": "What is a balanced diet?",
+    "a": "A balanced diet generally includes: whole grains, vegetables, fruits, protein (dal/beans/eggs/fish/chicken/paneer), healthy fats (nuts/seeds/olive/mustard oil), and enough water. Limit ultra-processed foods and excess sugar.",
+    "tags": ["diet", "balanced diet", "nutrition"]
+  },
+  {
+    "q": "What can help with common cold symptoms?",
+    "a": "Rest, fluids, warm soups, steam inhalation, and salt-water gargles may help. Honey (for adults/children >1 year) can soothe cough. Seek care if you have trouble breathing, high fever, chest pain, or symptoms persist.",
+    "tags": ["cold", "cough", "steam", "gargle"]
+  }
+]
